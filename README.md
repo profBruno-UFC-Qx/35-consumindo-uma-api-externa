@@ -1,8 +1,8 @@
 # Descrição
 
-Neste exercício, vaamos implementar um fluxo fíctcio de login usando `promises`.
+Neste exercício, você irá utilizar uma API pública de informações climáticas para recuperar a temperatura atual de uma cidade brasileira qualquer.
 
-Objetivo desse exercício é praticar a manipulação de `promises`. 
+Objetivo deste exercício, é a pratica do uso de Promises para buscar dados de uma API externa e manipulá-los.
 
 **Todas as alterações devem ser feitas nos arquivos já existentes**
 
@@ -10,11 +10,20 @@ Objetivo desse exercício é praticar a manipulação de `promises`.
 
 ## Instruções:
 
-1. Crie uma função chamada `verificarUsuario` que retorna uma Promise que simula a verificação de um nome de usuário.
-  - Para simplificar a implementação a função deve resolver a `promise` quando o nome de usuário informando for `sucesso@mail.com` retornando a mensagem *Usuário válido*, caso contrário a `promise` deve ser rejeitada com a mensagem *Usuário inválido*.
-2. Crie outra função chamada `verificarSenha` que retorna uma Promise que simula a verificação da senha.
-  - Considere que a senha correta é 123456, nesse caso a `promise` deve ser resolvida com a mensagem *Senha correta*, caso contrário, a `promise` deve ser rejeitada com a mensagem *Usuário ou senha inválidos*.
-3. Crie outra função chamado `login` que deve receber o email do usário e a senha como argumentos.
-4. Dentro desta função, encadeie as Promises usando `.then()` para simular um fluxo de autenticação, onde a primeira Promise representa a verificação do nome de usuário e a segunda Promise representa a verificação da senha.
-5. Use `.then()` e `.catch()`para lidar com o resultado do fluxo de autenticação.
-6. Caso o usuário informe usuário e senha corretamente, a função deve retornar a segunite mensagem *Login realizado com sucesso*, caso contrário ela deve lançar uma exceção com a mensagem *Usuário ou senha inválidos*.
+1. Iremos utilizar a API do [Open Meteo](https://open-meteo.com/). Mais especificamente iremos requisitar a seguinte URL:
+
+```
+https://api.open-meteo.com/v1/forecast?latitude=${LATITUDE}&longitude=${LONGITUDE}&current_weather=true
+```
+  - Desta forma será necessário passar dois parâmtros para nesta URL, a latitude e a longitude da cidade que você quer verificar o tempo.
+  - Exemplo, para verificar o clima atual em Fortaleza devemos fazer a seguinte requisição:
+```
+https://api.open-meteo.com/v1/forecast?latitude=-3.7275&longitude=-38.4767&current_weather=true
+```
+  - Você pode encontrar a latitude e longitude das principais cidades do país no site [simplemaps.com](https://simplemaps.com/data/br-cities)
+2. Crie uma função chamada buscarDados que aceite a latitude e a longitude de uma cidade como argumento e retorne uma Promise.
+3. Dentro da função, faça uma solicitação GET assíncrona para a API usando a função fetch().
+4. Resolva a Promise com os dados retornados após a resposta da API ser convertida para JSON.
+5. Manipule os dados retornados para exibir informações relevantes, como a temperatura.
+6. Trate os possíveis erros, como falha na conexão com a API.
+
